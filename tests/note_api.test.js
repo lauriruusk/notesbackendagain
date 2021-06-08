@@ -44,6 +44,19 @@ test('the first note is about HTTP methods', async () => {
     expect(contents).toContain('Browser can execute only Javascript')
 })
 
+test('a valid note can be added ', async () => {
+    const newNote = {
+        content: 'async/await simplifies making async calls',
+        important: true,
+    }
+
+    await api
+        .post('/api/notes')
+        .send(NewNote)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
